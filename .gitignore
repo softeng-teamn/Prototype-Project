@@ -1,0 +1,15 @@
+.gradle/
+.idea/
+.idea/workspace.xml
+classes/
+build/
+out/
+gradlew
+gradlew.bat
+derby.log
+*.class
+*.jar
+*.lock
+*.iml
+*db*/
+testfx-test*.png
