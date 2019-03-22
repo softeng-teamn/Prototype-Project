@@ -1,3 +1,32 @@
 language: java
 jdk:
       - oraclejdk8
+
+before_install:
+      - chmod +x gradlew
+      - sudo apt-get install -y sshpass
+
+before_script:
+      - "export DISPLAY=:99.0"
+      - "sh -e /etc/init.d/xvfb start"
+      - sleep 3 # give xvfb some time to start
+
+jobs:
+      include:
+            - if: branch = master
+              script: ./gradlew clean check spotbugsMain spotbugsTest
+            - if: branch = dev
+              script: ./gradlew clean check spotbugsMain spotbugsTest
+            - if: branch = ui
+              script: ./gradlew clean fastTest uiFastTest uiSlowTest spotbugsMain spotbugsTest
+            - if: branch != master AND branch != dev
+              script: ./gradlew clean fastTest uiFastTest spotbugsMain spotbugsTest
+
+env:
+      global:
+            - secure: "Y7YqwAyuUXd9l/Xvwh/3Qx4+U0VnVL2+QaVzmpMibzMmnzbm+dNKfKaJG0Nc69TSZLhTPi8wt85Bo80GnuJW21/6Slyi5r4GcS3iZPJzM4+Pd80HmRosTTCr14KQsVt4YZCc9pZ8rt0SHLPQjs9Kq5AgFuvEwPCh9YSHmFwcNu7hzF0CTBQaGBdknWzBhp1tA8nJI7z77aR9EdnmPaeR17ZbZlYczJI/Grkw2yHp+K2/G0T3jw5t42UM9VXqTamjfXSffINwrZm+ey9oTYo0uJjle3K9/0KbA5CHwbhzOM2Fni9GA8BRhlXKuEOVga79q7x1jczp/twSdx4gMZsUuwbFQfcpwWbbG2Kjez7UsgJc1XpvOIDjkFoD0SkFRDJnT5ZhacfJ7vJhCr+vCG5ZLQ1EoEsopJ4R6s2zhCW6g6yWQOPM3VZiYdWKdPha7x180X4h2GStBYtHTUogktdaGEno2goNhdp7b1p8Fy92VACUUgh5/WIY75Uv+tdrO6nprPGhTVQNP0W+6RLlT22LsuzVUq+a1dGQzEs/zW8Yb1H/AMRCU2XWWgzWF9D8jbEyH2jW1JTreu9VjCXPXI1+lceSBwzJrpJXN7FId3Jspm5SM96l6gQAlBg/Booq1aCth6h3fZtHSSM031be0BqXQLfwrYiaG74LWZdoUPBIGnc="
+            - secure: "jBkwBjB7EI4w4cPIMhmX3qZbqFL5KOFjmWIoMv3V5sIo+q+0nvtKeX1eOek0PH4Uq0nHyQYcWuT6oc59VP4fyDhi4jNhrWHAUCrQAk8FJVpS6VMF7UdktFWnaMIHkIZjy3TmLzBnDEyh1ed+eB5/UO/+dDTjLc/VfrS1YHwac8tVXLat2y0mz6QinLqZTYOfk6csXBHAxTJBt+2Tuq7N3DgnyccfzlMAYf3oqi2MP7wXUwndBov0NcjIHHfuhIfOE/zd4Cq5AGZ21Oaq1tcfkrwtgr2yCRPEr2G4Xcp72im0gGnBqnQxrrgugrYBHVwviJnUkKwaS9Btp15GLxI1M6fVnju7/RC09q0v9H5CzXSXSFYfOtGPGWEXwJUgZWJ/pOoSgR9OR7gZ0L5z3N5S5fw0ivjiJJeFTbKu1P6L2GZ2Ke6z1LTLIZGqjNBbDTkOYg6gJuhpTgLUiazAu6bZKV8tUL18GOAmnYBBxkFR+7W94zo3TA3WML+peUJwiJ0YsuiOsfmaTfwhilF+Ffkx9LMVsxnD3P7v1xMgmfEeGPwqVYfLlbg6L8rqYGciZjXCTHKTbwIT9/Iiab9Iv5LC8GEBxLx0wCVE4LWlT9RBzlqhDuXwmKpNA4g2i/49Fi7MR+KYhbPDG/85iZrpEjviF8BZeVOvrEUH4AV8aXHNlik="
+
+after_script:
+      - zip -r ${TRAVIS_JOB_NUMBER}_${BRANCH}.zip ./testfx-test*.png ./build/reports/*
+      - sshpass -p ${SFTP_PASSWORD} scp -o StrictHostKeyChecking=no ${TRAVIS_JOB_NUMBER}_${BRANCH}.zip ${SFTP_USER}@ravana.dyn.wpi.edu:public_html/${TRAVIS_REPO_SLUG}/
