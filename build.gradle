@@ -13,7 +13,9 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
 }
 ///////////////////////////////////////////////////
 
-
+wrapper {
+    gradleVersion = '5.2.1'
+}
 
 group 'edu.wpi.cs3733d19.teamN' // replace with your package name
 version '0.1'
