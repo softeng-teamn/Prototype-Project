@@ -51,7 +51,7 @@ public class Main extends Application {
             System.out.println(line);
         }
 
-
+        reader.close();
     }
 
 }
