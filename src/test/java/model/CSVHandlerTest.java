@@ -29,7 +29,9 @@ public class CSVHandlerTest {
         assertThat(res, is(true));
         File result = new File("./export_test_empty_result.csv");
         contentEquals(expected, result);
-        result.delete();
+        boolean del_res = result.delete();
+        if (!del_res) System.out.println("Failed to delete test file export_test_empty_result.csv");
+
 
 
 
@@ -50,7 +52,8 @@ public class CSVHandlerTest {
         assertThat(res, is(true));
         result = new File("./export_test_1_result.csv");
         contentEquals(expected, result);
-        result.delete();
+        del_res = result.delete();
+        if (!del_res) System.out.println("Failed to delete test file export_test_1_result.csv");
 
 
 
@@ -68,7 +71,8 @@ public class CSVHandlerTest {
         assertThat(res, is(true));
         result = new File("./export_test_2_result.csv");
         contentEquals(expected, result);
-        result.delete();
+        del_res = result.delete();
+        if (!del_res) System.out.println("Failed to delete test file export_test_2_result.csv");
     }
 
     @Test
