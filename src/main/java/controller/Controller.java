@@ -49,7 +49,6 @@ public class Controller {
 
     @FXML
     public void initialize() {
-        System.out.println("i was just initialized");
         // show the nodes
 
 //        ArrayList<Node> nodes = DBController.myDBC.getAllNodes();

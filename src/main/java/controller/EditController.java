@@ -7,8 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Node;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class EditController {
 
@@ -41,6 +43,9 @@ public class EditController {
 
     @FXML
     public void initialize() {
-        System.out.println("edit INIT");
+        ArrayList<Node> nodes = new ArrayList<Node>();
+        nodes.add(new Node("nid", "2", "bmT", "nType", "long", "short",12, 34));
+        nodes.add(new Node("nid2","2", "bmH", "nTypess", "longer", "shortr", 3, 7));
+
     }
 }
