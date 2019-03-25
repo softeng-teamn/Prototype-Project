@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.Controller"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="298.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+   <children>
+      <JFXListView fx:id="id" layoutY="83.0" prefHeight="214.0" prefWidth="76.0" />
+      <JFXListView layoutX="76.0" layoutY="83.0" prefHeight="214.0" prefWidth="76.0" fx:id="x" />
+      <JFXListView fx:id="y" layoutX="152.0" layoutY="83.0" prefHeight="214.0" prefWidth="76.0" />
+      <JFXListView fx:id="floor" layoutX="228.0" layoutY="83.0" prefHeight="214.0" prefWidth="76.0" />
+      <JFXListView fx:id="building" layoutX="304.0" layoutY="83.0" prefHeight="214.0" prefWidth="76.0" />
+      <Label layoutX="32.0" layoutY="58.0" text="ID" />
+      <Label layoutX="111.0" layoutY="59.0" text="x" />
+      <Label layoutX="185.0" layoutY="59.0" text="y" />
+      <Label layoutX="249.0" layoutY="59.0" text="floor" />
+      <Label layoutX="317.0" layoutY="59.0" text="building" />
+      <Label layoutX="403.0" layoutY="58.0" text="type" />
+      <JFXListView fx:id="type" layoutX="380.0" layoutY="83.0" prefHeight="214.0" prefWidth="76.0" />
+      <JFXListView fx:id="longName" layoutX="456.0" layoutY="83.0" prefHeight="214.0" prefWidth="76.0" />
+      <Label layoutX="461.0" layoutY="58.0" text="longName" />
+      <Label layoutX="537.0" layoutY="58.0" text="shortName" />
+      <JFXListView fx:id="shortName" layoutX="532.0" layoutY="83.0" prefHeight="214.0" prefWidth="76.0" />
+      <JFXButton fx:id="editBtn" layoutX="477.0" layoutY="12.0" onAction="#editAction" text="Edit" />
+      <JFXButton fx:id="exportBtn" layoutX="534.0" layoutY="12.0" onAction="#exportAction" text="Export" />
+   </children>
 </AnchorPane>

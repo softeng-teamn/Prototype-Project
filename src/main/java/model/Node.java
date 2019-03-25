@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 public class Node {
     private String nodeID, floor, building, nodeType, longName, shortName;
     private int xcoord, ycoord;
-
     private static final String[] VALID_FLOORS = {"L2", "L1", "G", "1", "2", "3"};
     private static final String[] VALID_NODE_TYPES = {"CONF", "HALL", "DEPT", "INFO", "LABS", "REST", "SERV", "STAI"};
 
