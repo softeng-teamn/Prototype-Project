@@ -16,7 +16,8 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("./home.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("HelloSwingNode Sample");
+        stage.setTitle("Data View");
+        root.requestFocus();
         stage.show();
     }
 

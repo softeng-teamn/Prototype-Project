@@ -22,6 +22,8 @@ public class EditController {
         Stage mainStage = (Stage) btn.getScene().getWindow();
         Scene scene = new Scene(root);
         mainStage.setScene(scene);
+        mainStage.setTitle("Data View");
+        root.requestFocus();
         mainStage.show();
     }
 
@@ -32,6 +34,8 @@ public class EditController {
         Stage mainStage = (Stage) btn.getScene().getWindow();
         Scene scene = new Scene(root);
         mainStage.setScene(scene);
+        mainStage.setTitle("Export to CSV");
+        root.requestFocus();
         mainStage.show();
     }
 
