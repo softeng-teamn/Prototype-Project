@@ -4,6 +4,17 @@ public class Node {
     private String nodeID, floor, building, nodeType, longName, shortName;
     private int xcoord, ycoord;
 
+    public Node(String nodeID, int xcoord, int ycoord, String floor, String building, String nodeType, String longName, String shortName) {
+        this.nodeID = nodeID;
+        this.floor = floor;
+        this.building = building;
+        this.nodeType = nodeType;
+        this.longName = longName;
+        this.shortName = shortName;
+        this.xcoord = xcoord;
+        this.ycoord = ycoord;
+    }
+
     public String getNodeID() {
         return nodeID;
     }
