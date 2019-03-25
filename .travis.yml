@@ -14,12 +14,12 @@ before_script:
 jobs:
       include:
             - if: branch = master
-              script: ./gradlew clean check spotbugsMain spotbugsTest
+              script: ./gradlew clean check spotbugsMain spotbugsTest jar
             - if: branch = dev
-              script: ./gradlew clean check spotbugsMain spotbugsTest
+              script: ./gradlew clean check spotbugsMain spotbugsTest jar
             - if: branch = ui
               script: ./gradlew clean fastTest uiFastTest uiSlowTest spotbugsMain spotbugsTest
-            - if: branch != master AND branch != dev
+            - if: branch != master AND branch != dev AND branch != ui
               script: ./gradlew clean fastTest uiFastTest spotbugsMain spotbugsTest
 
 env:
@@ -28,5 +28,5 @@ env:
             - secure: "jBkwBjB7EI4w4cPIMhmX3qZbqFL5KOFjmWIoMv3V5sIo+q+0nvtKeX1eOek0PH4Uq0nHyQYcWuT6oc59VP4fyDhi4jNhrWHAUCrQAk8FJVpS6VMF7UdktFWnaMIHkIZjy3TmLzBnDEyh1ed+eB5/UO/+dDTjLc/VfrS1YHwac8tVXLat2y0mz6QinLqZTYOfk6csXBHAxTJBt+2Tuq7N3DgnyccfzlMAYf3oqi2MP7wXUwndBov0NcjIHHfuhIfOE/zd4Cq5AGZ21Oaq1tcfkrwtgr2yCRPEr2G4Xcp72im0gGnBqnQxrrgugrYBHVwviJnUkKwaS9Btp15GLxI1M6fVnju7/RC09q0v9H5CzXSXSFYfOtGPGWEXwJUgZWJ/pOoSgR9OR7gZ0L5z3N5S5fw0ivjiJJeFTbKu1P6L2GZ2Ke6z1LTLIZGqjNBbDTkOYg6gJuhpTgLUiazAu6bZKV8tUL18GOAmnYBBxkFR+7W94zo3TA3WML+peUJwiJ0YsuiOsfmaTfwhilF+Ffkx9LMVsxnD3P7v1xMgmfEeGPwqVYfLlbg6L8rqYGciZjXCTHKTbwIT9/Iiab9Iv5LC8GEBxLx0wCVE4LWlT9RBzlqhDuXwmKpNA4g2i/49Fi7MR+KYhbPDG/85iZrpEjviF8BZeVOvrEUH4AV8aXHNlik="
 
 after_script:
-      - zip -r ${TRAVIS_JOB_NUMBER}_${TRAVIS_BRANCH}.zip ./testfx-test*.png ./build/reports/*
+      - zip -r ${TRAVIS_JOB_NUMBER}_${TRAVIS_BRANCH}.zip ./testfx-test*.png ./build/reports/* ./build/libs/*
       - sshpass -p ${SFTP_PASSWORD} scp -o StrictHostKeyChecking=no ${TRAVIS_JOB_NUMBER}_${TRAVIS_BRANCH}.zip ${SFTP_USER}@ravana.dyn.wpi.edu:public_html/${TRAVIS_REPO_SLUG}/
