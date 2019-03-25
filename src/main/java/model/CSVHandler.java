@@ -1,9 +1,8 @@
 package model;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import com.sun.javafx.binding.StringFormatter;
+
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,8 +10,25 @@ import java.util.List;
 
 public class CSVHandler {
 
-    public static boolean exportFile(ArrayList<Node> nodes) {
-        return false;
+    public static boolean exportFile(ArrayList<Node> nodes, String path) {
+        try (PrintWriter writer = new PrintWriter(new File(path), "UTF-8")) {
+            String line = "nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName\n";
+            writer.write(line);
+
+            for (Node node: nodes) {
+                line = StringFormatter.format("%s,%s,%s,%s,%s,%s,%s,%s\n", node.getNodeID(), node.getXcoord(), node.getYcoord(), node.getFloor(), node.getBuilding(), node.getNodeType(), node.getLongName(), node.getShortName()).getValue();
+
+                writer.write(line);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+            return false;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 
     public static ArrayList<Node> importFile(String fileName) throws IOException {

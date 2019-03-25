@@ -119,7 +119,7 @@ dependencies {
             [group: 'org.loadui', name: 'testFx', version: '3.1.2'],
             [group: 'org.mockito', name: 'mockito-core', 'version': '2.7.22'],
             [group: 'com.github.spotbugs', name: 'spotbugs-annotations', version: '3.1.3'],
-            [group: 'junit-addons', name: 'junit-addons', version: '1.4']
+            [group: 'commons-io', name: 'commons-io', version: '2.6']
     )
     compile(
             [group: 'com.jfoenix', name: 'jfoenix', version: '8.0.3'],
