@@ -3,10 +3,12 @@ package controller;
 import java.sql.*;
 import model.Node;
 import java.util.ArrayList;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 public class DBController {
 
     // Note: DB
+    @SuppressFBWarnings(value="UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD", justification="Triggered because it's unused. Will be used when implemented.")
     public static DBController myDBC;
 
     private DBController(Connection connection, String name) throws SQLException {
