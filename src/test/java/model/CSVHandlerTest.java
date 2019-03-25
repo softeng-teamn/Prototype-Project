@@ -27,7 +27,9 @@ public class CSVHandlerTest {
         boolean res = CSVHandler.exportFile(data, "export_test_empty_result.csv");
 
         assertThat(res, is(true));
-        contentEquals(expected, new File("./export_test_empty_result.csv"));
+        File result = new File("./export_test_empty_result.csv");
+        contentEquals(expected, result);
+        result.delete();
 
 
 
@@ -46,7 +48,9 @@ public class CSVHandlerTest {
         res = CSVHandler.exportFile(data, "export_test_1_result.csv");
 
         assertThat(res, is(true));
-        contentEquals(expected, new File("./export_test_1_result.csv"));
+        result = new File("./export_test_1_result.csv");
+        contentEquals(expected, result);
+        result.delete();
 
 
 
@@ -62,7 +66,9 @@ public class CSVHandlerTest {
         res = CSVHandler.exportFile(data, "export_test_2_result.csv");
 
         assertThat(res, is(true));
-        contentEquals(expected, new File("./export_test_2_result.csv"));
+        result = new File("./export_test_2_result.csv");
+        contentEquals(expected, result);
+        result.delete();
     }
 
     @Test
