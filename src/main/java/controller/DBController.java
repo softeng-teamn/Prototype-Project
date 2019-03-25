@@ -13,36 +13,50 @@ public class DBController {
     private Connection connection;
     private String name;
 
-    private DBController(Connection connection, String name) throws SQLException {
+    private DBController(Connection connection, String name){
         this.connection = connection;
-
         initializeTables();
-
         this.name = name;
     }
 
-    private void initializeTables() throws SQLException {
-        if (!this.tableExists("NODE")) {
-            Statement statement = connection.createStatement();
+    public String getName() {
+        return name;
+    }
 
-            statement.execute("CREATE TABLE NODE (nodeID varchar(10) PRIMARY KEY, xcoord int, ycoord int, floor varchar(2), building varchar(10), nodeType varchar(4), longName varchar(75), shortName varchar(50))");
+    private void initializeTables(){
+        try {
+            if (!this.tableExists("NODE")) {
+                Statement statement = connection.createStatement();
+                statement.execute("CREATE TABLE NODE (nodeID varchar(10) PRIMARY KEY, xcoord int, ycoord int, floor varchar(2), building varchar(10), nodeType varchar(4), longName varchar(75), shortName varchar(50))");
+                statement.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    public static void init(String name) throws SQLException {
-        DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-        Connection connection = DriverManager.getConnection("jdbc:derby:" + name + ";create=true");
+    public static void init(String name){
+        try {
+            DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
+            Connection connection = DriverManager.getConnection("jdbc:derby:" + name + ";create=true");
+            myDBC = new DBController(connection, name);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-        myDBC = new DBController(connection, name);
     }
 
-    public static void init() throws SQLException {
-        init("prototype-DB");
+    public static void init(){
+            init("prototype-DB");
     }
 
-    public static void close()  throws SQLException {
-        myDBC.connection.close();
-        myDBC = null;
+    public static void close(){
+        try {
+            myDBC.connection.close();
+            myDBC = null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean insertNode(Node node) {
@@ -54,19 +68,28 @@ public class DBController {
         String shortName = node.getShortName();
         int xcoord = node.getXcoord();
         int ycoord = node.getYcoord();
-        String insertStatement = "INSERT INTO NODE VALUES(" + nodeID + ", " + xcoord + ", " + ycoord +", " + floor + ", " + building + ", " + nodeType + ", " + longName + ", " + shortName + ")";
+        String insertStatement = "INSERT INTO NODE VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         System.out.print(insertStatement);
         try{
-            Statement stmt = connection.createStatement();
-            int insertResult = stmt.executeUpdate(insertStatement);
-            return true;
+            PreparedStatement stmt = connection.prepareStatement(insertStatement);
+            stmt.setString(1, nodeID);
+            stmt.setInt(2, xcoord);
+            stmt.setInt(3, ycoord);
+            stmt.setString(4, floor);
+            stmt.setString(5, building);
+            stmt.setString(6, nodeType);
+            stmt.setString(7, longName);
+            stmt.setString(8, shortName);
+            stmt.executeUpdate(insertStatement);
+            stmt.close();
         }
         catch(SQLException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     public boolean deleteNode(Node node) {
@@ -103,14 +126,16 @@ public class DBController {
                 Node newNode = new Node(newNodeID, newFloor, newBuilding, newNodeType, newLongName, newShortName, newxcoord, newycoord);
                 allNodes.add(newNode);
             }
-            return allNodes;
+            stmt.close();
+            nodes.close();
         }
         catch(SQLException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
+            return null;
         }
 
-        return null;
+        return allNodes;
     }
 
     public Node getNode(String nodeID){
@@ -134,6 +159,8 @@ public class DBController {
             String newShortName = oneNode.getString("shortName");
             // construct the new node and return it
             newNode = new Node(newNodeID, newFloor, newBuilding, newNodeType, newLongName, newShortName, newxcoord, newycoord);
+            stmt.close();
+            oneNode.close();
             return newNode;
         }
         catch(SQLException e) {
@@ -144,9 +171,16 @@ public class DBController {
         return null;
     }
 
-    public boolean tableExists(String table) throws SQLException {
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet rs = dbm.getTables(null, null, table, null);
-        return rs.next();
+    public boolean tableExists(String table){
+        DatabaseMetaData dbm = null;
+        try {
+            dbm = connection.getMetaData();
+            ResultSet rs = dbm.getTables(null, null, table, null);
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 }
