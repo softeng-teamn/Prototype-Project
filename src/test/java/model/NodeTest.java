@@ -20,7 +20,7 @@ public class NodeTest {
             String value = values[i];
             boolean expected = expectedResults[i];
 
-            assertThat(value, is(expected));
+            assertThat(Node.validateID(value), is(expected));
         }
     }
 
@@ -36,7 +36,7 @@ public class NodeTest {
             int value = values[i];
             boolean expected = expectedResults[i];
 
-            assertThat(value, is(expected));
+            assertThat(Node.validateCoordinate(value), is(expected));
         }
     }
 
@@ -52,7 +52,7 @@ public class NodeTest {
             String value = values[i];
             boolean expected = expectedResults[i];
 
-            assertThat(value, is(expected));
+            assertThat(Node.validateFloor(value), is(expected));
         }
     }
 
@@ -68,7 +68,7 @@ public class NodeTest {
             String value = values[i];
             boolean expected = expectedResults[i];
 
-            assertThat(value, is(expected));
+            assertThat(Node.validateNodeType(value), is(expected));
         }
     }
 }

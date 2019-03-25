@@ -1,8 +1,13 @@
 package model;
 
+import java.util.regex.Pattern;
+
 public class Node {
     private String nodeID, floor, building, nodeType, longName, shortName;
     private int xcoord, ycoord;
+
+    private static final String VALID_FLOORS[] = {"L2", "L1", "G", "1", "2", "3"};
+    private static final String VALID_NODE_TYPES[] = {"CONF", "HALL", "DEPT", "INFO", "LABS", "REST", "SERV", "STAI"};
 
     public String getNodeID() {
         return nodeID;
@@ -69,18 +74,32 @@ public class Node {
     }
 
     public static boolean validateID(String nodeID) {
-        return false;
+        if (nodeID == null) return false;
+
+        final Pattern pattern = Pattern.compile("^[ABCDEFGH][A-Z]{4}[0-9]{5}$");
+
+        return pattern.matcher(nodeID).matches();
     }
 
     public static boolean validateCoordinate(int coordinate) {
-        return false;
+        return coordinate >= 0;
     }
 
     public static boolean validateFloor(String floor) {
-        return false;
+        return validateFromList(floor, VALID_FLOORS);
     }
 
     public static boolean validateNodeType(String nodeType) {
+        return validateFromList(nodeType, VALID_NODE_TYPES);
+    }
+
+    private static boolean validateFromList(String value, String[] validValues) {
+        if (value == null) return false;
+
+        for (String validNodeType: validValues) {
+            if (value.equals(validNodeType)) return true;
+        }
+
         return false;
     }
 }
