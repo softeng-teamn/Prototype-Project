@@ -88,10 +88,12 @@ public class DBController {
             stmt.setString(7, longName);
             stmt.setString(8, shortName);
             try{
-                stmt.executeUpdate(insertStatement);
+                stmt.executeUpdate();
             } catch(SQLException e) {
+
                 System.out.println(e.getMessage());
                 e.printStackTrace();
+                return false;
             }
 
             stmt.close();
@@ -158,20 +160,7 @@ public class DBController {
             e.printStackTrace();
             return null;
         } finally {
-            if(nodes != null){
-                try {
-                    nodes.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if(stmt != null){
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeAll(stmt, nodes);
 
         }
 
@@ -209,24 +198,28 @@ public class DBController {
             System.out.println(e.getMessage());
             e.printStackTrace();
         } finally {
-            if(oneNode != null){
-                try {
-                    oneNode.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if(stmt != null){
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            closeAll(stmt, oneNode);
 
         }
 
         return null;
+    }
+
+    private void closeAll(Statement stmt, ResultSet oneNode) {
+        if(oneNode != null){
+            try {
+                oneNode.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if(stmt != null){
+            try {
+                stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public boolean tableExists(String table){
@@ -246,9 +239,9 @@ public class DBController {
         Statement statement = null;
         try {
             statement = myDBC.connection.createStatement();
-            if (tableExists("ENTRIES")) {
+            if (tableExists("NODE")) {
                 try {
-                    statement.execute("DROP TABLE ENTRIES");
+                    statement.execute("DROP TABLE NODE");
 
                 } catch (SQLException e) {
                     e.printStackTrace();
