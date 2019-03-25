@@ -50,10 +50,10 @@ public class Controller {
 
 //        ArrayList<Node> nodes = DBController.myDBC.getAllNodes();
         ArrayList<Node> nodes = new ArrayList<Node>();
-        nodes.add(new Node("nid", 12, 34, "2", "bmT", "nType", "long", "short"));
-        nodes.add(new Node("nid2", 3, 7, "2", "bmH", "nTypess", "longer", "shortr"));
+        nodes.add(new Node("nid", "2", "bmT", "nType", "long", "short",12, 34));
+        nodes.add(new Node("nid2","2", "bmH", "nTypess", "longer", "shortr", 3, 7));
 
-        nodes.forEach(node -> {
+        for (Node node : nodes) {
             id.getItems().add(node.getNodeID());
             x.getItems().add(node.getXcoord());
             y.getItems().add(node.getYcoord());
@@ -62,7 +62,7 @@ public class Controller {
             type.getItems().add(node.getNodeType());
             longName.getItems().add(node.getLongName());
             shortName.getItems().add(node.getShortName());
-        });
+        }
 
     }
 
