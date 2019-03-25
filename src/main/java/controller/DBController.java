@@ -9,7 +9,7 @@ public class DBController {
 
     // Note: DB
     @SuppressFBWarnings(value="UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD", justification="Triggered because it's unused. Will be used when implemented.")
-    public static DBController myDBC;
+    static DBController myDBC;
     private Connection connection;
     private String name;
 
@@ -24,12 +24,19 @@ public class DBController {
     }
 
     private void initializeTables(){
+        Statement statement;
         try {
-            if (!this.tableExists("NODE")) {
-                Statement statement = connection.createStatement();
-                statement.execute("CREATE TABLE NODE (nodeID varchar(10) PRIMARY KEY, xcoord int, ycoord int, floor varchar(2), building varchar(10), nodeType varchar(4), longName varchar(75), shortName varchar(50))");
-                statement.close();
+            statement = connection.createStatement();
+            try{
+                if (!this.tableExists("NODE")) {
+
+                    statement.execute("CREATE TABLE NODE (nodeID varchar(10) PRIMARY KEY, xcoord int, ycoord int, floor varchar(2), building varchar(10), nodeType varchar(4), longName varchar(75), shortName varchar(50))");
+
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -69,9 +76,9 @@ public class DBController {
         int xcoord = node.getXcoord();
         int ycoord = node.getYcoord();
         String insertStatement = "INSERT INTO NODE VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-        System.out.print(insertStatement);
+        PreparedStatement stmt = null;
         try{
-            PreparedStatement stmt = connection.prepareStatement(insertStatement);
+            stmt = connection.prepareStatement(insertStatement);
             stmt.setString(1, nodeID);
             stmt.setInt(2, xcoord);
             stmt.setInt(3, ycoord);
@@ -80,13 +87,28 @@ public class DBController {
             stmt.setString(6, nodeType);
             stmt.setString(7, longName);
             stmt.setString(8, shortName);
-            stmt.executeUpdate(insertStatement);
+            try{
+                stmt.executeUpdate(insertStatement);
+            } catch(SQLException e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
+
             stmt.close();
         }
         catch(SQLException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
             return false;
+        } finally {
+            if(stmt != null){
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
 
         return true;
@@ -107,11 +129,13 @@ public class DBController {
     public ArrayList<Node> getAllNodes() {
         ArrayList<Node> allNodes = new ArrayList<Node>();
         String query = "Select * FROM NODE";
+        Statement stmt = null;
+        ResultSet nodes = null;
         try{
-            Statement stmt = connection.createStatement();
+            stmt = connection.createStatement();
 
             // execute the query
-            ResultSet nodes = stmt.executeQuery(query);
+            nodes = stmt.executeQuery(query);
             while(nodes.next()){
                 // extract results from each row of the database.
                 String newNodeID = nodes.getString("nodeID");
@@ -133,6 +157,22 @@ public class DBController {
             System.out.println(e.getMessage());
             e.printStackTrace();
             return null;
+        } finally {
+            if(nodes != null){
+                try {
+                    nodes.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(stmt != null){
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
 
         return allNodes;
@@ -141,12 +181,14 @@ public class DBController {
     public Node getNode(String nodeID){
         // assemble the query
         Node newNode;
+        Statement stmt = null;
+        ResultSet oneNode = null;
         String query = ("Select * FROM NODE WHERE (nodeID =" + nodeID + ")");
         try{
-            Statement stmt = connection.createStatement();
+            stmt = connection.createStatement();
 
             // execute the query
-            ResultSet oneNode = stmt.executeQuery(query);
+            oneNode = stmt.executeQuery(query);
 
             // extract results, only one record should be found.
             String newNodeID = oneNode.getString("nodeID");
@@ -166,6 +208,22 @@ public class DBController {
         catch(SQLException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
+        } finally {
+            if(oneNode != null){
+                try {
+                    oneNode.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(stmt != null){
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
 
         return null;
@@ -181,6 +239,26 @@ public class DBController {
             e.printStackTrace();
             return false;
         }
+
+    }
+
+    public void dropAll(){
+        Statement statement = null;
+        try {
+            statement = myDBC.connection.createStatement();
+            if (tableExists("ENTRIES")) {
+                try {
+                    statement.execute("DROP TABLE ENTRIES");
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }

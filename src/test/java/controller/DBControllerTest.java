@@ -15,35 +15,14 @@ import static org.junit.Assert.*;
 public class DBControllerTest {
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
+        DBController.init();
     }
 
     @After
     public void tearDown() throws Exception {
-    }
-
-    @Test
-    @Category(FastTest.class)
-    public void init(){
-        // This test wouldn't be valid if myDBC already had a value, so check this first
-        assertThat(DBController.myDBC, is(nullValue()));
-
-        // Attempt to initialize
-        DBController.init();
-
-        // Verify that myDBC now has a value and has the correct name
-        assertThat(DBController.myDBC, is(notNullValue()));
-        assertThat(DBController.myDBC.getName(), is("prototype-DB"));
-
-        // Attempt to close
-        DBController.close();
-
-        // myDBC should once again be null
-        assertThat(DBController.myDBC, is(nullValue()));
-    }
-
-    @Test
-    public void init1() {
+        DBController.myDBC.dropAll();
+        close();
     }
 
     @Test
