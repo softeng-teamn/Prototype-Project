@@ -4,6 +4,7 @@
 |[dev](https://github.com/softeng-teamn/Prototype-Project/tree/dev)|[![Build Status](https://travis-ci.com/softeng-teamn/Prototype-Project.svg?branch=dev)](https://travis-ci.com/softeng-teamn/Prototype-Project)|
 |[db](https://github.com/softeng-teamn/Prototype-Project/tree/db)|[![Build Status](https://travis-ci.com/softeng-teamn/Prototype-Project.svg?branch=db)](https://travis-ci.com/softeng-teamn/Prototype-Project)|
 |[ui](https://github.com/softeng-teamn/Prototype-Project/tree/ui)|[![Build Status](https://travis-ci.com/softeng-teamn/Prototype-Project.svg?branch=ui)](https://travis-ci.com/softeng-teamn/Prototype-Project)|
+|[model](https://github.com/softeng-teamn/Prototype-Project/tree/ui)|[![Build Status](https://travis-ci.com/softeng-teamn/Prototype-Project.svg?branch=model)](https://travis-ci.com/softeng-teamn/Prototype-Project)|
 
 To assemble a jar file for your project, run the "jar" gradle task, either through IntelliJ or by doing
 `gradle jar` on a terminal. Gradle will automatically download all dependencies needed to compile your jar file,
