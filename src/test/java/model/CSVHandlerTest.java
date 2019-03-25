@@ -59,10 +59,10 @@ public class CSVHandlerTest {
         data.add(new Node("BHALL03802", "2","45 Francis", "HALL", "Hallway Intersection 38 Level 2", "Hallway B3802", 2279,786));
         data.add(new Node("BDEPT00202","2","45 Francis","DEPT","Oral Medicine and Dentistry","DEPT B0202",2166,1039));
         data.add(new Node("BDEPT00302", "2","45 Francis","DEPT", "Lee Bell Breast Center" , "DEPT B0302", 2385,753));
-        res = CSVHandler.exportFile(data, "export_test_1_result.csv");
+        res = CSVHandler.exportFile(data, "export_test_2_result.csv");
 
         assertThat(res, is(true));
-        contentEquals(expected, new File("./export_test_1_result.csv"));
+        contentEquals(expected, new File("./export_test_2_result.csv"));
     }
 
     @Test
