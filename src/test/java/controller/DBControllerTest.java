@@ -56,8 +56,6 @@ public class DBControllerTest {
         assertThat(myDBC.deleteNode(testNode),is(true));
         //make sure that it is not in the database
         assertThat((myDBC.getNode("ACONF00102")),is(nullValue()));
-        // ensure that it cannot be deleted a second time and that exceptions are handled.
-        //assertThat(myDBC.deleteNode(testNode),is(false));
 
     }
 
