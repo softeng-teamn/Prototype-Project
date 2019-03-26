@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
 import model.Node;
 
 import java.io.IOException;
@@ -30,8 +31,10 @@ public class EditController {
     private TableView<Node> table_info;
 
     @FXML
-    private TableColumn<Node, String> col_short, col_id, col_building, col_floor, col_long, col_y, col_x, col_type;
+    private TableColumn<Node, String> col_short, col_id, col_building, col_floor, col_long, col_type;
 
+    @FXML
+    private TableColumn<Node, Integer> col_x, col_y;
 
 
     @FXML
@@ -75,8 +78,8 @@ public class EditController {
         col_type.setCellValueFactory(new PropertyValueFactory<>("nodeType"));
         col_long.setCellValueFactory(new PropertyValueFactory<>("longName"));
         col_short.setCellValueFactory(new PropertyValueFactory<>("shortName"));
-        col_x.setCellValueFactory(new PropertyValueFactory<>("xtemp"));
-        col_y.setCellValueFactory(new PropertyValueFactory<>("yctemp"));
+        col_x.setCellValueFactory(new PropertyValueFactory<>("xcoord"));
+        col_y.setCellValueFactory(new PropertyValueFactory<>("ycoord"));
 
         editableCols();
     }
@@ -112,14 +115,14 @@ public class EditController {
         col_short.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setShortName(e.getNewValue()));
 
 
-        col_x.setCellFactory(TextFieldTableCell.forTableColumn());
+        col_x.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
-        col_x.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setXcoord(Integer.parseInt(e.getNewValue())));
+        col_x.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setXcoord(e.getNewValue()));
 
 
-        col_y.setCellFactory(TextFieldTableCell.forTableColumn());
+        col_y.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
-        col_y.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setYcoord(Integer.parseInt(e.getNewValue())));
+        col_y.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setYcoord(e.getNewValue()));
     }
 
     private void loadData() {
@@ -128,6 +131,7 @@ public class EditController {
         nodes.add(new Node("nid2","2", "bmH", "nTypess", "longer", "shortr", 3, 7));
 
         table_info.setItems(nodes);
+        table_info.setEditable(true);
     }
 
 }
