@@ -2,6 +2,8 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,6 +16,8 @@ import model.Node;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+
+// save ANY change to DB
 
 public class Controller {
 
@@ -51,7 +55,9 @@ public class Controller {
     public void initialize() {
         // show the nodes
 
-//        ArrayList<Node> nodes = DBController.myDBC.getAllNodes();
+//        ObservableList<Node> nodes = FXCollections.observableArrayList();
+//        ArrayList<Node> cleanNodes = DBController.myDBC.getAllNodes();
+//        nodes.addAll(cleanNodes);
         ArrayList<Node> nodes = new ArrayList<Node>();
         nodes.add(new Node("nid", "2", "bmT", "nType", "long", "short",12, 34));
         nodes.add(new Node("nid2","2", "bmH", "nTypess", "longer", "shortr", 3, 7));
