@@ -24,10 +24,10 @@ public class ExportController {
 
     @FXML
     public final void saveAction(ActionEvent e) {
-//        ArrayList<Node> allNodes = DBController.myDBC.getAllNodes();
-        ArrayList<Node> allNodes = new ArrayList<Node>();
-        allNodes.add(new Node("nid", "2", "bmT", "nType", "long", "short",12, 34));
-        allNodes.add(new Node("nid2","2", "bmH", "nTypess", "longer", "shortr", 3, 7));
+        ArrayList<Node> allNodes = DBController.myDBC.getAllNodes();
+//        ArrayList<Node> allNodes = new ArrayList<Node>();
+//        allNodes.add(new Node("nid", "2", "bmT", "nType", "long", "short",12, 34));
+//        allNodes.add(new Node("nid2","2", "bmH", "nTypess", "longer", "shortr", 3, 7));
 
         CSVHandler.exportFile(allNodes, pathFinder.getText());
         Stage stage =  (Stage) pathFinder.getScene().getWindow();

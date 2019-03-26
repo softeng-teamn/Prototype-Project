@@ -9,7 +9,7 @@ public class DBController {
 
     // Note: DB
     @SuppressFBWarnings(value="UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD", justification="Triggered because it's unused. Will be used when implemented.")
-    static DBController myDBC;
+    public static DBController myDBC;
     private Connection connection;
     private String name;
 

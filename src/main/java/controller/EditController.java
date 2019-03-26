@@ -164,10 +164,10 @@ public class EditController {
 
     private void loadData() {
         ObservableList<Node> nodes = FXCollections.observableArrayList();
-//        ArrayList<Node> cleanNodes = DBController.myDBC.getAllNodes();
-//        nodes.addAll(cleanNodes);
-        nodes.add(new Node("nid", "2", "bmT", "nType", "long", "short",12, 34));
-        nodes.add(new Node("nid2","2", "bmH", "nTypess", "longer", "shortr", 3, 7));
+        ArrayList<Node> cleanNodes = DBController.myDBC.getAllNodes();
+        nodes.addAll(cleanNodes);
+//        nodes.add(new Node("nid", "2", "bmT", "nType", "long", "short",12, 34));
+//        nodes.add(new Node("nid2","2", "bmH", "nTypess", "longer", "shortr", 3, 7));
 
         table_info.setItems(nodes);
         table_info.setEditable(true);

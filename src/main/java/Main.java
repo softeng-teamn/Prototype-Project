@@ -1,11 +1,15 @@
+import controller.DBController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.CSVHandler;
+import model.Node;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,7 +25,26 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    @Override
+    public void stop() {
+        DBController.myDBC.dropAll();
+        DBController.close();
+        System.out.println("Database Closed");
+    }
+
+    public static void main(String[] args) throws IOException {
+        startDB();
         launch();
     }
+
+    public static void startDB() throws IOException {
+        DBController.init();
+//        DBController.myDBC.dropAll();
+        ArrayList<Node> nodes = CSVHandler.importFile("../PrototypeNodes.csv");
+        for (Node n : nodes) {
+            DBController.myDBC.insertNode(n);
+        }
+        System.out.println("Database Started");
+    }
+
 }
