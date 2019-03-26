@@ -90,7 +90,6 @@ public class DBController {
             try{
                 stmt.executeUpdate();
             } catch(SQLException e) {
-
                 System.out.println(e.getMessage());
                 e.printStackTrace();
                 return false;
@@ -108,6 +107,7 @@ public class DBController {
                     stmt.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    return false;
                 }
             }
 
@@ -133,6 +133,7 @@ public class DBController {
                     stmt.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    return false;
                 }
             }
 
@@ -181,7 +182,6 @@ public class DBController {
             return null;
         } finally {
             closeAll(stmt, nodes);
-
         }
 
         return allNodes;
@@ -201,7 +201,13 @@ public class DBController {
             oneNode = stmt.executeQuery();
 
             // extract results, only one record should be found.
-            oneNode.next();
+            boolean hasNext = oneNode.next();
+
+            // If there is no next node, return null
+            if (!hasNext) {
+                return null;
+            }
+
             String newNodeID = oneNode.getString("nodeID");
             int newxcoord = oneNode.getInt("xcoord");
             int newycoord = oneNode.getInt("ycoord");
@@ -221,7 +227,6 @@ public class DBController {
             e.printStackTrace();
         } finally {
             closeAll(stmt, oneNode);
-
         }
 
         return null;
