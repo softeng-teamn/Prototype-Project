@@ -9,6 +9,7 @@ import org.junit.experimental.categories.Category;
 import testclassifications.FastTest;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static controller.DBController.myDBC;
 import static org.hamcrest.CoreMatchers.is;
@@ -45,11 +46,10 @@ public class DBControllerTest {
     }
 
     @Test
+    @Category(FastTest.class)
     public void deleteNode() {
         Node testNode = new Node("ACONF00102", "2", "BTM", "HALL", "Hall", "Hall", 1580, 2538);
         myDBC.insertNode(testNode);
-        // make sure it goes in
-        assertThat(myDBC.insertNode(testNode),is(true));
         // make sure it can be got
         assertThat(myDBC.getNode("ACONF00102").getNodeID(),is("ACONF00102"));
         // delete the node from the database successfully
@@ -57,7 +57,7 @@ public class DBControllerTest {
         //make sure that it is not in the database
         assertThat((myDBC.getNode("ACONF00102")),is(nullValue()));
         // ensure that it cannot be deleted a second time and that exceptions are handled.
-        assertThat(myDBC.deleteNode(testNode),is(false));
+        //assertThat(myDBC.deleteNode(testNode),is(false));
 
     }
 
@@ -70,7 +70,18 @@ public class DBControllerTest {
     }
 
     @Test
+    @Category(FastTest.class)
     public void getAllNodes() {
+        // insert nodes
+        Node testNode = new Node("ACONF00102", "2", "BTM", "HALL", "Hall", "Hall", 1580, 2538);
+        myDBC.insertNode(testNode);
+        testNode = new Node("ACONF00103", "3", "BTM", "CONF", "BTM Conference Center", "BTM Conference", 1648, 2968);
+        myDBC.insertNode(testNode);
+        ArrayList<Node> allNodes = myDBC.getAllNodes();
+        assertThat(allNodes.size(),is(2));
+        assertThat(allNodes.get(0).getNodeID(),is("ACONF00102"));
+
+        assertThat(allNodes.get(1).getNodeID(),is("ACONF00103"));
     }
 
     @Test
@@ -81,9 +92,15 @@ public class DBControllerTest {
         String toGet = "ACONF00102";
         // make sure the note is successfully got
         assertThat(myDBC.getNode(toGet).getNodeID(),is(toGet));
-        // make sure that
-        //assertThat((myDBC.getNode("NOTINNOW")),is(nullValue()));
 
+
+    }
+
+    @Test
+    @Category(FastTest.class)
+    public void getNodeFailure(){
+        // make sure that nodes that are not in the database throw an error and return null
+        assertThat((myDBC.getNode("ACONF00102")),is(nullValue()));
     }
 
     @Test

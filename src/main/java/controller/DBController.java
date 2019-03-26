@@ -117,7 +117,27 @@ public class DBController {
     }
 
     public boolean deleteNode(Node node) {
-        return false;
+        PreparedStatement stmt = null;
+        String nodeID = node.getNodeID();
+        String query = "DELETE FROM NODE WHERE (nodeID = ?)";
+        try {
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1,nodeID);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if(stmt != null){
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        return true;
     }
 
     public boolean updateNode(Node node) {
