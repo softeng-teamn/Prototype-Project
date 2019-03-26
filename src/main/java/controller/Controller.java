@@ -53,14 +53,16 @@ public class Controller {
 
     @FXML
     public void initialize() {
+        System.out.println("is this here??");
         // show the nodes
 
 //        ObservableList<Node> nodes = FXCollections.observableArrayList();
-//        ArrayList<Node> cleanNodes = DBController.myDBC.getAllNodes();
+        ArrayList<Node> nodes = DBController.getMyDBC().getAllNodes();
 //        nodes.addAll(cleanNodes);
-        ArrayList<Node> nodes = new ArrayList<Node>();
-        nodes.add(new Node("nid", "2", "bmT", "nType", "long", "short",12, 34));
-        nodes.add(new Node("nid2","2", "bmH", "nTypess", "longer", "shortr", 3, 7));
+
+//        ArrayList<Node> nodes = new ArrayList<Node>();
+//        nodes.add(new Node("nid", "2", "bmT", "nType", "long", "short",12, 34));
+//        nodes.add(new Node("nid2","2", "bmH", "nTypess", "longer", "shortr", 3, 7));
 
         for (Node node : nodes) {
             id.getItems().add(node.getNodeID());

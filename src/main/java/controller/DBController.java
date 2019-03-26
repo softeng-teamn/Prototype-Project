@@ -3,11 +3,11 @@ package controller;
 import java.sql.*;
 import model.Node;
 import java.util.ArrayList;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 public class DBController {
 
-    static DBController myDBC;
+
+    private static DBController myDBC;
     private Connection connection;
     private String name;
 
@@ -19,6 +19,10 @@ public class DBController {
 
     public String getName() {
         return name;
+    }
+
+    public static DBController getMyDBC() {
+        return myDBC;
     }
 
     private void initializeTables(){

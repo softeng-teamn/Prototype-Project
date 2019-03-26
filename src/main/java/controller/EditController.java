@@ -96,7 +96,7 @@ public class EditController {
         col_id.setOnEditCommit(e -> {
             Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
             n.setNodeID(e.getNewValue());
-            DBController.myDBC.updateNode(n);
+            DBController.getMyDBC().updateNode(n);
         });
 
 
@@ -105,7 +105,7 @@ public class EditController {
         col_floor.setOnEditCommit(e -> {
             Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
             n.setFloor(e.getNewValue());
-            DBController.myDBC.updateNode(n);
+            DBController.getMyDBC().updateNode(n);
         });
 
 
@@ -114,7 +114,7 @@ public class EditController {
         col_building.setOnEditCommit(e -> {
             Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
             n.setBuilding(e.getNewValue());
-            DBController.myDBC.updateNode(n);
+            DBController.getMyDBC().updateNode(n);
         });
 
 
@@ -123,7 +123,7 @@ public class EditController {
         col_type.setOnEditCommit(e -> {
             Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
             n.setNodeType(e.getNewValue());
-            DBController.myDBC.updateNode(n);
+            DBController.getMyDBC().updateNode(n);
         });
 
 
@@ -132,7 +132,7 @@ public class EditController {
         col_long.setOnEditCommit(e -> {
             Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
             n.setLongName(e.getNewValue());
-            DBController.myDBC.updateNode(n);
+            DBController.getMyDBC().updateNode(n);
         });
 
 
@@ -141,7 +141,7 @@ public class EditController {
         col_short.setOnEditCommit(e -> {
             Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
             n.setShortName(e.getNewValue());
-            DBController.myDBC.updateNode(n);
+            DBController.getMyDBC().updateNode(n);
         });
 
 
@@ -150,7 +150,7 @@ public class EditController {
         col_x.setOnEditCommit(e -> {
             Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
             n.setXcoord(e.getNewValue());
-            DBController.myDBC.updateNode(n);
+            DBController.getMyDBC().updateNode(n);
         });
 
         col_y.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
@@ -158,16 +158,16 @@ public class EditController {
         col_y.setOnEditCommit(e -> {
             Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
             n.setYcoord(e.getNewValue());
-            DBController.myDBC.updateNode(n);
+            DBController.getMyDBC().updateNode(n);
         });
     }
 
     private void loadData() {
         ObservableList<Node> nodes = FXCollections.observableArrayList();
-//        ArrayList<Node> cleanNodes = DBController.myDBC.getAllNodes();
-//        nodes.addAll(cleanNodes);
-        nodes.add(new Node("nid", "2", "bmT", "nType", "long", "short",12, 34));
-        nodes.add(new Node("nid2","2", "bmH", "nTypess", "longer", "shortr", 3, 7));
+        ArrayList<Node> cleanNodes = DBController.getMyDBC().getAllNodes();
+        nodes.addAll(cleanNodes);
+//        nodes.add(new Node("nid", "2", "bmT", "nType", "long", "short",12, 34));
+//        nodes.add(new Node("nid2","2", "bmH", "nTypess", "longer", "shortr", 3, 7));
 
         table_info.setItems(nodes);
         table_info.setEditable(true);
