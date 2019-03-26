@@ -57,7 +57,7 @@ public class Controller {
         // show the nodes
 
 //        ObservableList<Node> nodes = FXCollections.observableArrayList();
-        ArrayList<Node> nodes = DBController.myDBC.getAllNodes();
+        ArrayList<Node> nodes = DBController.getMyDBC().getAllNodes();
 //        nodes.addAll(cleanNodes);
 
 //        ArrayList<Node> nodes = new ArrayList<Node>();

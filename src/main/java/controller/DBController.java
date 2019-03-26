@@ -9,7 +9,7 @@ public class DBController {
 
     // Note: DB
     @SuppressFBWarnings(value="UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD", justification="Triggered because it's unused. Will be used when implemented.")
-    public static DBController myDBC;
+    private static DBController myDBC;
     private Connection connection;
     private String name;
 
@@ -21,6 +21,10 @@ public class DBController {
 
     public String getName() {
         return name;
+    }
+
+    public static DBController getMyDBC() {
+        return myDBC;
     }
 
     private void initializeTables(){

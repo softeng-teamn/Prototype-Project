@@ -27,7 +27,7 @@ public class Main extends Application {
 
     @Override
     public void stop() {
-        DBController.myDBC.dropAll();
+        DBController.getMyDBC().dropAll();
         DBController.close();
         System.out.println("Database Closed");
     }
@@ -42,7 +42,7 @@ public class Main extends Application {
 //        DBController.myDBC.dropAll();
         ArrayList<Node> nodes = CSVHandler.importFile("../PrototypeNodes.csv");
         for (Node n : nodes) {
-            DBController.myDBC.insertNode(n);
+            DBController.getMyDBC().insertNode(n);
         }
         System.out.println("Database Started");
     }
