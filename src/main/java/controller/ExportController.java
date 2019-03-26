@@ -10,8 +10,10 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.CSVHandler;
+import model.Node;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ExportController {
     @FXML
@@ -22,7 +24,12 @@ public class ExportController {
 
     @FXML
     public final void saveAction(ActionEvent e) {
-        CSVHandler.exportFile(DBController.myDBC.getAllNodes(), pathFinder.getText());
+//        ArrayList<Node> allNodes = DBController.myDBC.getAllNodes();
+        ArrayList<Node> allNodes = new ArrayList<Node>();
+        allNodes.add(new Node("nid", "2", "bmT", "nType", "long", "short",12, 34));
+        allNodes.add(new Node("nid2","2", "bmH", "nTypess", "longer", "shortr", 3, 7));
+
+        CSVHandler.exportFile(allNodes, pathFinder.getText());
         Stage stage =  (Stage) pathFinder.getScene().getWindow();
         stage.close();
     }

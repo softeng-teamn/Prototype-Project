@@ -18,6 +18,7 @@ import javafx.util.converter.IntegerStringConverter;
 import model.Node;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class EditController {
 
@@ -62,6 +63,11 @@ public class EditController {
     }
 
     @FXML
+    public final void editCommit(ActionEvent e) {
+        System.out.println("im committed to you");
+    }
+
+    @FXML
     public void initialize() {
         initTable();
         loadData();
@@ -87,46 +93,79 @@ public class EditController {
     private void editableCols() {
         col_id.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        col_id.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setNodeID(e.getNewValue()));
+        col_id.setOnEditCommit(e -> {
+            Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
+            n.setNodeID(e.getNewValue());
+            DBController.myDBC.updateNode(n);
+        });
 
 
         col_floor.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        col_floor.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setFloor(e.getNewValue()));
+        col_floor.setOnEditCommit(e -> {
+            Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
+            n.setFloor(e.getNewValue());
+            DBController.myDBC.updateNode(n);
+        });
 
 
         col_building.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        col_building.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setBuilding(e.getNewValue()));
+        col_building.setOnEditCommit(e -> {
+            Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
+            n.setBuilding(e.getNewValue());
+            DBController.myDBC.updateNode(n);
+        });
 
 
         col_type.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        col_type.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setNodeType(e.getNewValue()));
+        col_type.setOnEditCommit(e -> {
+            Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
+            n.setNodeType(e.getNewValue());
+            DBController.myDBC.updateNode(n);
+        });
 
 
         col_long.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        col_long.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setLongName(e.getNewValue()));
+        col_long.setOnEditCommit(e -> {
+            Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
+            n.setLongName(e.getNewValue());
+            DBController.myDBC.updateNode(n);
+        });
 
 
         col_short.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        col_short.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setShortName(e.getNewValue()));
+        col_short.setOnEditCommit(e -> {
+            Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
+            n.setShortName(e.getNewValue());
+            DBController.myDBC.updateNode(n);
+        });
 
 
         col_x.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
-        col_x.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setXcoord(e.getNewValue()));
-
+        col_x.setOnEditCommit(e -> {
+            Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
+            n.setXcoord(e.getNewValue());
+            DBController.myDBC.updateNode(n);
+        });
 
         col_y.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
-        col_y.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setYcoord(e.getNewValue()));
+        col_y.setOnEditCommit(e -> {
+            Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
+            n.setYcoord(e.getNewValue());
+            DBController.myDBC.updateNode(n);
+        });
     }
 
     private void loadData() {
         ObservableList<Node> nodes = FXCollections.observableArrayList();
+//        ArrayList<Node> cleanNodes = DBController.myDBC.getAllNodes();
+//        nodes.addAll(cleanNodes);
         nodes.add(new Node("nid", "2", "bmT", "nType", "long", "short",12, 34));
         nodes.add(new Node("nid2","2", "bmH", "nTypess", "longer", "shortr", 3, 7));
 
