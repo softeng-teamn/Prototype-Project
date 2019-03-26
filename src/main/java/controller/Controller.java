@@ -30,6 +30,8 @@ public class Controller {
         Stage mainStage = (Stage) btn.getScene().getWindow();
         Scene scene = new Scene(root);
         mainStage.setScene(scene);
+        mainStage.setTitle("Editor");
+        root.requestFocus();
         mainStage.show();
     }
 
@@ -40,12 +42,13 @@ public class Controller {
         Stage mainStage = (Stage) btn.getScene().getWindow();
         Scene scene = new Scene(root);
         mainStage.setScene(scene);
+        mainStage.setTitle("Export to CSV");
+        root.requestFocus();
         mainStage.show();
     }
 
     @FXML
     public void initialize() {
-        System.out.println("i was just initialized");
         // show the nodes
 
 //        ArrayList<Node> nodes = DBController.myDBC.getAllNodes();

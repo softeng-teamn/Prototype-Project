@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane prefHeight="298.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditController">
+<AnchorPane prefHeight="351.0" prefWidth="683.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditController">
    <children>
-      <JFXButton fx:id="viewBtn" layoutX="477.0" layoutY="12.0" onAction="#viewAction" text="View" />
-      <JFXButton fx:id="exportBtn" layoutX="534.0" layoutY="12.0" onAction="#exportAction" text="Export" />
+      <JFXButton fx:id="viewBtn" layoutX="477.0" layoutY="12.0" onAction="#viewAction" text="View" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="10.0" />
+      <JFXButton fx:id="exportBtn" layoutX="534.0" layoutY="12.0" onAction="#exportAction" text="Export" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <TableView fx:id="table_info" layoutX="8.0" layoutY="56.0" prefHeight="289.0" prefWidth="613.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="50.0">
+        <columns>
+          <TableColumn fx:id="col_id" prefWidth="75.0" text="id" />
+          <TableColumn fx:id="col_x" prefWidth="75.0" text="x" />
+            <TableColumn fx:id="col_y" prefWidth="75.0" text="y" />
+            <TableColumn fx:id="col_floor" prefWidth="75.0" text="floor" />
+            <TableColumn fx:id="col_building" prefWidth="75.0" text="building" />
+            <TableColumn fx:id="col_type" prefWidth="75.0" text="type" />
+            <TableColumn fx:id="col_long" prefWidth="75.0" text="longName" />
+            <TableColumn fx:id="col_short" prefWidth="75.0" text="shortName" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

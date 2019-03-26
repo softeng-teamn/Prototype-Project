@@ -21,6 +21,8 @@ public class ExportController {
         Stage mainStage = (Stage) btn.getScene().getWindow();
         Scene scene = new Scene(root);
         mainStage.setScene(scene);
+        mainStage.setTitle("Data View");
+        root.requestFocus();
         mainStage.show();
     }
 
@@ -31,6 +33,8 @@ public class ExportController {
         Stage mainStage = (Stage) btn.getScene().getWindow();
         Scene scene = new Scene(root);
         mainStage.setScene(scene);
+        mainStage.setTitle("Editor");
+        root.requestFocus();
         mainStage.show();
     }
 }

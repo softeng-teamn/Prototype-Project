@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,26 +8,64 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="298.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<AnchorPane prefHeight="298.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <children>
-      <JFXListView fx:id="id" layoutY="83.0" prefHeight="214.0" prefWidth="76.0" />
-      <JFXListView layoutX="76.0" layoutY="83.0" prefHeight="214.0" prefWidth="76.0" fx:id="x" />
-      <JFXListView fx:id="y" layoutX="152.0" layoutY="83.0" prefHeight="214.0" prefWidth="76.0" />
-      <JFXListView fx:id="floor" layoutX="228.0" layoutY="83.0" prefHeight="214.0" prefWidth="76.0" />
-      <JFXListView fx:id="building" layoutX="304.0" layoutY="83.0" prefHeight="214.0" prefWidth="76.0" />
-      <Label layoutX="32.0" layoutY="58.0" text="ID" />
-      <Label layoutX="111.0" layoutY="59.0" text="x" />
-      <Label layoutX="185.0" layoutY="59.0" text="y" />
-      <Label layoutX="249.0" layoutY="59.0" text="floor" />
-      <Label layoutX="317.0" layoutY="59.0" text="building" />
-      <Label layoutX="403.0" layoutY="58.0" text="type" />
-      <JFXListView fx:id="type" layoutX="380.0" layoutY="83.0" prefHeight="214.0" prefWidth="76.0" />
-      <JFXListView fx:id="longName" layoutX="456.0" layoutY="83.0" prefHeight="214.0" prefWidth="76.0" />
-      <Label layoutX="461.0" layoutY="58.0" text="longName" />
-      <Label layoutX="537.0" layoutY="58.0" text="shortName" />
-      <JFXListView fx:id="shortName" layoutX="532.0" layoutY="83.0" prefHeight="214.0" prefWidth="76.0" />
-      <JFXButton fx:id="editBtn" layoutX="477.0" layoutY="12.0" onAction="#editAction" text="Edit" />
-      <JFXButton fx:id="exportBtn" layoutX="534.0" layoutY="12.0" onAction="#exportAction" text="Export" />
+      <HBox layoutY="83.0" prefHeight="251.0" prefWidth="726.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+               <children>
+                  <Label text="ID" />
+                  <JFXListView fx:id="id" prefHeight="214.0" prefWidth="76.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+               <children>
+                  <Label text="x" />
+                  <JFXListView prefHeight="214.0" prefWidth="76.0" VBox.vgrow="ALWAYS" fx:id="x" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+               <children>
+                  <Label text="y" />
+                  <JFXListView fx:id="y" prefHeight="214.0" prefWidth="98.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+               <children>
+                  <Label text="floor" />
+                  <JFXListView fx:id="floor" prefHeight="214.0" prefWidth="103.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+               <children>
+                  <Label text="building" />
+                  <JFXListView fx:id="building" prefHeight="214.0" prefWidth="76.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+               <children>
+                  <Label text="type" />
+                  <JFXListView fx:id="type" prefHeight="214.0" prefWidth="84.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+               <children>
+                  <Label text="longName" />
+                  <JFXListView fx:id="longName" prefHeight="214.0" prefWidth="83.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+               <children>
+                  <Label text="shortName" />
+                  <JFXListView fx:id="shortName" prefHeight="214.0" prefWidth="85.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <JFXButton fx:id="editBtn" layoutX="477.0" layoutY="12.0" onAction="#editAction" text="Edit" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="10.0" />
+      <JFXButton fx:id="exportBtn" layoutX="534.0" layoutY="12.0" onAction="#exportAction" text="Export" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
    </children>
 </AnchorPane>
