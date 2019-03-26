@@ -7,9 +7,8 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 public class DBController {
 
-    // Note: DB
-    @SuppressFBWarnings(value="UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD", justification="Triggered because it's unused. Will be used when implemented.")
     public static DBController myDBC;
+
     private Connection connection;
     private String name;
 
@@ -54,7 +53,7 @@ public class DBController {
     }
 
     public static void init(){
-            init("prototype-DB");
+            init("prototype-db-test");
     }
 
     public static void close(){
@@ -90,7 +89,6 @@ public class DBController {
             try{
                 stmt.executeUpdate();
             } catch(SQLException e) {
-
                 System.out.println(e.getMessage());
                 e.printStackTrace();
                 return false;
@@ -108,6 +106,7 @@ public class DBController {
                     stmt.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    return false;
                 }
             }
 
@@ -133,6 +132,7 @@ public class DBController {
                     stmt.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    return false;
                 }
             }
 
@@ -141,7 +141,53 @@ public class DBController {
     }
 
     public boolean updateNode(Node node) {
-        return false;
+        String nodeID = node.getNodeID();
+        String floor = node.getFloor();
+        String building = node.getBuilding();
+        String nodeType = node.getNodeType();
+        String longName = node.getLongName();
+        String shortName = node.getShortName();
+        int xcoord = node.getXcoord();
+        int ycoord = node.getYcoord();
+        String insertStatement = "UPDATE NODE SET xcoord=?, ycoord=?, floor=?, building=?, nodeType=?, longName=?, shortName=? WHERE (nodeID = ?)";
+        PreparedStatement stmt = null;
+        try{
+            stmt = connection.prepareStatement(insertStatement);
+            stmt.setInt(1, xcoord);
+            stmt.setInt(2, ycoord);
+            stmt.setString(3, floor);
+            stmt.setString(4, building);
+            stmt.setString(5, nodeType);
+            stmt.setString(6, longName);
+            stmt.setString(7, shortName);
+            stmt.setString(8, nodeID);
+            try{
+                stmt.executeUpdate();
+            } catch(SQLException e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+                return false;
+            }
+
+            stmt.close();
+        }
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return false;
+        } finally {
+            if(stmt != null){
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+
+        }
+
+        return true;
     }
 
     public ArrayList<Node> getNodes(int num, int offset) {
@@ -181,7 +227,6 @@ public class DBController {
             return null;
         } finally {
             closeAll(stmt, nodes);
-
         }
 
         return allNodes;
@@ -201,7 +246,13 @@ public class DBController {
             oneNode = stmt.executeQuery();
 
             // extract results, only one record should be found.
-            oneNode.next();
+            boolean hasNext = oneNode.next();
+
+            // If there is no next node, return null
+            if (!hasNext) {
+                return null;
+            }
+
             String newNodeID = oneNode.getString("nodeID");
             int newxcoord = oneNode.getInt("xcoord");
             int newycoord = oneNode.getInt("ycoord");
@@ -221,7 +272,6 @@ public class DBController {
             e.printStackTrace();
         } finally {
             closeAll(stmt, oneNode);
-
         }
 
         return null;
@@ -254,7 +304,6 @@ public class DBController {
             e.printStackTrace();
             return false;
         }
-
     }
 
     public void dropAll(){
@@ -273,7 +322,5 @@ public class DBController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 }
