@@ -170,16 +170,18 @@ public class DBController {
     public Node getNode(String nodeID){
         // assemble the query
         Node newNode;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         ResultSet oneNode = null;
-        String query = ("Select * FROM NODE WHERE (nodeID =" + nodeID + ")");
+        String query = "Select * FROM NODE WHERE (nodeID = ?)";
         try{
-            stmt = connection.createStatement();
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, nodeID);
 
             // execute the query
-            oneNode = stmt.executeQuery(query);
+            oneNode = stmt.executeQuery();
 
             // extract results, only one record should be found.
+            oneNode.next();
             String newNodeID = oneNode.getString("nodeID");
             int newxcoord = oneNode.getInt("xcoord");
             int newycoord = oneNode.getInt("ycoord");
