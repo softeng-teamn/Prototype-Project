@@ -56,11 +56,16 @@ public class DBControllerTest {
         assertThat(myDBC.deleteNode(testNode),is(true));
         //make sure that it is not in the database
         assertThat((myDBC.getNode("ACONF00102")),is(nullValue()));
-
+        //delete is like update so trying to delete a record that isn't there doesn't cause problems. No case needed for that.
     }
 
     @Test
     public void updateNode() {
+        Node testNode = new Node("ACONF00102", "2", "BTM", "HALL", "Hall", "Hall", 1580, 2538);
+        myDBC.insertNode(testNode);
+        testNode = new Node("ACONF00102", "3", "BTM", "CONF", "Halla", "Halls", 1582, 2540);
+        myDBC.updateNode(testNode);
+        // then assert the new values one by one
     }
 
     @Test
@@ -78,8 +83,15 @@ public class DBControllerTest {
         ArrayList<Node> allNodes = myDBC.getAllNodes();
         assertThat(allNodes.size(),is(2));
         assertThat(allNodes.get(0).getNodeID(),is("ACONF00102"));
-
         assertThat(allNodes.get(1).getNodeID(),is("ACONF00103"));
+
+        testNode = new Node("ACONF00104", "3", "BTM", "CONF", "BTM Conference Center", "BTM Conference", 1648, 2968);
+        myDBC.insertNode(testNode);
+        allNodes = myDBC.getAllNodes();
+        assertThat(allNodes.size(),is(3));
+        assertThat(allNodes.get(0).getNodeID(),is("ACONF00102"));
+        assertThat(allNodes.get(1).getNodeID(),is("ACONF00103"));
+        assertThat(allNodes.get(2).getNodeID(),is("ACONF00104"));
     }
 
     @Test
