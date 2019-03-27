@@ -91,13 +91,13 @@ public class EditController {
     }
 
     private void editableCols() {
-        col_id.setCellFactory(TextFieldTableCell.forTableColumn());
-
-        col_id.setOnEditCommit(e -> {
-            Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
-            n.setNodeID(e.getNewValue());
-            DBController.getMyDBC().updateNode(n);
-        });
+//        col_id.setCellFactory(TextFieldTableCell.forTableColumn());
+//
+//        col_id.setOnEditCommit(e -> {
+//            Node n = e.getTableView().getItems().get(e.getTablePosition().getRow());
+//            n.setNodeID(e.getNewValue());
+//            DBController.getMyDBC().updateNode(n);
+//        });
 
 
         col_floor.setCellFactory(TextFieldTableCell.forTableColumn());

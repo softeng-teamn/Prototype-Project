@@ -8,10 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="149.0" prefWidth="264.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ExportController">
    <children>
-      <Label layoutX="22.0" layoutY="14.0" text="Folder Path Destination">
+      <Label layoutX="86.0" layoutY="14.0" text="Name File">
          <font>
             <Font size="20.0" />
          </font>
