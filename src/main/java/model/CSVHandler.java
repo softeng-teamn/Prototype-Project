@@ -13,7 +13,7 @@ import java.util.List;
 public class CSVHandler {
 
     public static boolean exportFile(ArrayList<Node> nodes, String path) {
-        try (PrintWriter writer = new PrintWriter(new File(path), "UTF-8")) {
+        try (PrintWriter writer = new PrintWriter(new File(path + ".csv"), "UTF-8")) {
             String line = "nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName\n";
             writer.write(line);
 
