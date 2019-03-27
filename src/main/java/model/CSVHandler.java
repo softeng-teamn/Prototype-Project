@@ -36,7 +36,7 @@ public class CSVHandler {
     public static ArrayList<Node> importFile(InputStream in) throws IOException {
         ArrayList<Node> nodes = new ArrayList<>();
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
         // Setup vars
         String nodeID, building, nodeType, longName, shortName, floor;
         int xcoord, ycoord;
