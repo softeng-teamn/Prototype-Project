@@ -53,7 +53,7 @@ public class EditController {
 
     @FXML
     public final void exportAction(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(ResourceManager.getResource("home.fxml"));
+        Parent root = FXMLLoader.load(ResourceManager.getResource("export.fxml"));
         JFXButton btn = (JFXButton) e.getSource();
         Stage mainStage = (Stage) btn.getScene().getWindow();
         Scene scene = new Scene(root);
