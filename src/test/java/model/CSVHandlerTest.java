@@ -83,7 +83,7 @@ public class CSVHandlerTest {
         ArrayList<Node> expected;
 
         testFile = "../PrototypeNodes_testset_empty.csv";
-        result = CSVHandler.importFile(testFile);
+        result = CSVHandler.importFile(this.getClass().getResourceAsStream(testFile));
         expected = new ArrayList<>();
 
         assertThat(result, is(notNullValue()));
@@ -94,7 +94,7 @@ public class CSVHandlerTest {
 
 
         testFile = "../PrototypeNodes_testset_1.csv";
-        result = CSVHandler.importFile(testFile);
+        result = CSVHandler.importFile(this.getClass().getResourceAsStream(testFile));
         expected = new ArrayList<>();
         expected.add(new Node("BCONF00102",
                 "2",
@@ -116,7 +116,7 @@ public class CSVHandlerTest {
 
 
         testFile = "../PrototypeNodes_testset_2.csv";
-        result = CSVHandler.importFile(testFile);
+        result = CSVHandler.importFile(this.getClass().getResourceAsStream(testFile));
         expected = new ArrayList<>();
         expected.add(new Node("BHALL03802", "2","45 Francis", "HALL", "Hallway Intersection 38 Level 2", "Hallway B3802", 2279,786));
         expected.add(new Node("BDEPT00202","2","45 Francis","DEPT","Oral Medicine and Dentistry","DEPT B0202",2166,1039));
