@@ -15,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Node;
+import services.ResourceManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class Controller {
 
     @FXML
     public final void editAction(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../editor.fxml"));
+        Parent root = FXMLLoader.load(ResourceManager.getResource("editor.fxml"));
         JFXButton btn = (JFXButton) e.getSource();
         Stage mainStage = (Stage) btn.getScene().getWindow();
         Scene scene = new Scene(root);
@@ -47,7 +48,7 @@ public class Controller {
 
     @FXML
     public final void exportAction(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../export.fxml"));
+        Parent root = FXMLLoader.load(ResourceManager.getResource("export.fxml"));
         JFXButton btn = (JFXButton) e.getSource();
         Stage mainStage = (Stage) btn.getScene().getWindow();
         Scene scene = new Scene(root);

@@ -16,6 +16,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import model.Node;
+import services.ResourceManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class EditController {
 
     @FXML
     public final void viewAction(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../home.fxml"));
+        Parent root = FXMLLoader.load(ResourceManager.getResource("home.fxml"));
         JFXButton btn = (JFXButton) e.getSource();
         Stage mainStage = (Stage) btn.getScene().getWindow();
         Scene scene = new Scene(root);
@@ -52,7 +53,7 @@ public class EditController {
 
     @FXML
     public final void exportAction(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../export.fxml"));
+        Parent root = FXMLLoader.load(ResourceManager.getResource("home.fxml"));
         JFXButton btn = (JFXButton) e.getSource();
         Stage mainStage = (Stage) btn.getScene().getWindow();
         Scene scene = new Scene(root);

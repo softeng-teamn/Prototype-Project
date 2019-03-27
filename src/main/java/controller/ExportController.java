@@ -11,6 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.CSVHandler;
 import model.Node;
+import services.ResourceManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class ExportController {
     @FXML
     public final void exAction(ActionEvent e) throws IOException {
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("../path.fxml"));
+        Parent root = FXMLLoader.load(ResourceManager.getResource("path.fxml"));
         stage.setScene(new Scene(root));
         stage.setTitle("Save Path");
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -48,7 +49,7 @@ public class ExportController {
 
     @FXML
     public final void viewAction(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../home.fxml"));
+        Parent root = FXMLLoader.load(ResourceManager.getResource("home.fxml"));
         JFXButton btn = (JFXButton) e.getSource();
         Stage mainStage = (Stage) btn.getScene().getWindow();
         Scene scene = new Scene(root);
@@ -60,7 +61,7 @@ public class ExportController {
 
     @FXML
     public final void editAction(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../editor.fxml"));
+        Parent root = FXMLLoader.load(ResourceManager.getResource("editor.fxml"));
         JFXButton btn = (JFXButton) e.getSource();
         Stage mainStage = (Stage) btn.getScene().getWindow();
         Scene scene = new Scene(root);

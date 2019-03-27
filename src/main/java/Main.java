@@ -40,7 +40,7 @@ public class Main extends Application {
     public static void startDB() throws IOException {
         DBController.init();
 //        DBController.myDBC.dropAll();
-        ArrayList<Node> nodes = CSVHandler.importFile("../PrototypeNodes.csv");
+        ArrayList<Node> nodes = CSVHandler.importFile( Main.class.getResourceAsStream("PrototypeNodes.csv"));
         for (Node n : nodes) {
             DBController.getMyDBC().insertNode(n);
         }
