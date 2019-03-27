@@ -3,6 +3,8 @@ package model;
 import com.sun.javafx.binding.StringFormatter;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +13,7 @@ import java.util.List;
 public class CSVHandler {
 
     public static boolean exportFile(ArrayList<Node> nodes, String path) {
-        try (PrintWriter writer = new PrintWriter(new File(path), "UTF-8")) {
+        try (PrintWriter writer = new PrintWriter(new File(path + ".csv"), "UTF-8")) {
             String line = "nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName\n";
             writer.write(line);
 
@@ -31,12 +33,10 @@ public class CSVHandler {
         return true;
     }
 
-    public static ArrayList<Node> importFile(String fileName) throws IOException {
+    public static ArrayList<Node> importFile(InputStream in) throws IOException {
         ArrayList<Node> nodes = new ArrayList<>();
 
-        InputStream inputStream = CSVHandler.class.getResourceAsStream(fileName);
-        InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-        BufferedReader reader = new BufferedReader(streamReader);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
         // Setup vars
         String nodeID, building, nodeType, longName, shortName, floor;
         int xcoord, ycoord;

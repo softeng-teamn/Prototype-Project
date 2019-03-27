@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="149.0" prefWidth="264.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ExportController">
+   <children>
+      <Label layoutX="86.0" layoutY="14.0" text="Name File">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="pathFinder" layoutX="57.0" layoutY="55.0" />
+      <JFXButton fx:id="saveBtn" layoutX="202.0" layoutY="108.0" onAction="#saveAction" text="Save" />
+   </children>
+</AnchorPane>

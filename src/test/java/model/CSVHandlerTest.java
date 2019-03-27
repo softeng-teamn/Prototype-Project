@@ -27,7 +27,7 @@ public class CSVHandlerTest {
         boolean res = CSVHandler.exportFile(data, "export_test_empty_result.csv");
 
         assertThat(res, is(true));
-        File result = new File("./export_test_empty_result.csv");
+        File result = new File("./export_test_empty_result");
         contentEquals(expected, result);
         boolean del_res = result.delete();
         if (!del_res) System.out.println("Failed to delete test file export_test_empty_result.csv");
@@ -47,7 +47,7 @@ public class CSVHandlerTest {
                 "Duncan Reid Conference Room",
                 "Conf B0102",
                 2150,1025));
-        res = CSVHandler.exportFile(data, "export_test_1_result.csv");
+        res = CSVHandler.exportFile(data, "export_test_1_result");
 
         assertThat(res, is(true));
         result = new File("./export_test_1_result.csv");
@@ -66,7 +66,7 @@ public class CSVHandlerTest {
         data.add(new Node("BHALL03802", "2","45 Francis", "HALL", "Hallway Intersection 38 Level 2", "Hallway B3802", 2279,786));
         data.add(new Node("BDEPT00202","2","45 Francis","DEPT","Oral Medicine and Dentistry","DEPT B0202",2166,1039));
         data.add(new Node("BDEPT00302", "2","45 Francis","DEPT", "Lee Bell Breast Center" , "DEPT B0302", 2385,753));
-        res = CSVHandler.exportFile(data, "export_test_2_result.csv");
+        res = CSVHandler.exportFile(data, "export_test_2_result");
 
         assertThat(res, is(true));
         result = new File("./export_test_2_result.csv");
@@ -83,7 +83,7 @@ public class CSVHandlerTest {
         ArrayList<Node> expected;
 
         testFile = "../PrototypeNodes_testset_empty.csv";
-        result = CSVHandler.importFile(testFile);
+        result = CSVHandler.importFile(this.getClass().getResourceAsStream(testFile));
         expected = new ArrayList<>();
 
         assertThat(result, is(notNullValue()));
@@ -94,7 +94,7 @@ public class CSVHandlerTest {
 
 
         testFile = "../PrototypeNodes_testset_1.csv";
-        result = CSVHandler.importFile(testFile);
+        result = CSVHandler.importFile(this.getClass().getResourceAsStream(testFile));
         expected = new ArrayList<>();
         expected.add(new Node("BCONF00102",
                 "2",
@@ -116,7 +116,7 @@ public class CSVHandlerTest {
 
 
         testFile = "../PrototypeNodes_testset_2.csv";
-        result = CSVHandler.importFile(testFile);
+        result = CSVHandler.importFile(this.getClass().getResourceAsStream(testFile));
         expected = new ArrayList<>();
         expected.add(new Node("BHALL03802", "2","45 Francis", "HALL", "Hallway Intersection 38 Level 2", "Hallway B3802", 2279,786));
         expected.add(new Node("BDEPT00202","2","45 Francis","DEPT","Oral Medicine and Dentistry","DEPT B0202",2166,1039));
